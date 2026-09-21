@@ -1,7 +1,9 @@
 # DualLoop public website
 
 Keep the Nerfies academic-paper layout requested by the author. Maintain
-attribution and third-party notices. Do not add analytics by default.
+attribution and third-party notices. Google Analytics is explicitly enabled by the author for DualLoop through
+`googleAnalyticsId` in `data/site.json`; `scripts/sync_navigation.py` maintains
+one tag per page. Do not add other analytics by default.
 
 Questions remain prominent: keep the clickable header mosaic and six sample
 cards on the main page, followed by a clear link to `questions.html`. The full
