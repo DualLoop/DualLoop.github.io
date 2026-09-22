@@ -20,7 +20,19 @@
   }
   function link(label, href, className = "") {
     const a = document.createElement("a");
-    a.textContent = label;
+    if (className.includes("button") && new URL(href).hostname === "huggingface.co") {
+      const icon = document.createElement("img");
+      icon.src = "static/images/huggingface.svg";
+      icon.alt = "";
+      icon.setAttribute("aria-hidden", "true");
+      icon.className = "resource-icon";
+      icon.width = 20;
+      icon.height = 20;
+      a.append(icon);
+    }
+    const text = document.createElement("span");
+    text.textContent = label;
+    a.append(text);
     a.href = href;
     a.className = className;
     return a;

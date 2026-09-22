@@ -27,3 +27,7 @@ assets. Their public release license remains to be set by the project authors.
 [Google Fonts Inter distribution](https://github.com/google/fonts/tree/main/ofl/inter).
 It is licensed under the SIL Open Font License 1.1; the accompanying license
 is preserved at `static/fonts/Inter-OFL.txt`. The font is hosted locally.
+
+## Hugging Face logo
+
+`static/images/huggingface.svg` is the unmodified [Hugging Face logo](https://huggingface.co/front/assets/huggingface_logo-noborder.svg), used to identify links to datasets hosted on Hugging Face. The logo remains the property of Hugging Face.

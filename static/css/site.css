@@ -1238,3 +1238,9 @@ dialog::backdrop {
 .copy-status {
   overflow-wrap: anywhere;
 }
+
+.publication-links .resource-icon {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+}
