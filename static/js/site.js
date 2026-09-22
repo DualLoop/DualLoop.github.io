@@ -48,8 +48,8 @@
       const labels = {
         paper: "Paper",
         code: "Code",
-        data: "Evaluation dataset",
-        feedbackData: "Feedback dataset",
+        data: "Evaluation data",
+        feedbackData: "Feedback data",
         arxiv: "arXiv",
       };
       let configured = 0;
@@ -59,7 +59,7 @@
         configured++;
         document
           .querySelector("#publication-links")
-          .append(link(label, url, "button is-dark is-rounded"));
+          .append(link(label, url, "button resource-link"));
         document
           .querySelector("#resource-links")
           .prepend(link(`${label} ↗`, url));
