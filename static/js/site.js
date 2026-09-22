@@ -20,9 +20,11 @@
   }
   function link(label, href, className = "") {
     const a = document.createElement("a");
-    if (className.includes("button") && new URL(href).hostname === "huggingface.co") {
+    const iconFiles = {"huggingface.co": "huggingface.svg", "github.com": "github.svg"};
+    const iconFile = iconFiles[new URL(href).hostname];
+    if (className.includes("button") && iconFile) {
       const icon = document.createElement("img");
-      icon.src = "static/images/huggingface.svg";
+      icon.src = `static/images/${iconFile}`;
       icon.alt = "";
       icon.setAttribute("aria-hidden", "true");
       icon.className = "resource-icon";
@@ -47,7 +49,7 @@
       // This submission site intentionally has no author or affiliation rendering.
       const labels = {
         paper: "Paper",
-        code: "Code",
+        code: "GitHub",
         data: "Evaluation data",
         feedbackData: "Feedback data",
         arxiv: "arXiv",

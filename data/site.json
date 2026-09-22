@@ -1,7 +1,7 @@
 {
   "links": {
     "paper": "",
-    "code": "",
+    "code": "https://github.com/DualLoop/DaulLoop",
     "data": "https://huggingface.co/datasets/DualLoop/DualLoop-Evaluation",
     "arxiv": "",
     "feedbackData": "https://huggingface.co/datasets/DualLoop/DualLoop-Difficulty-Feedback"
@@ -10,6 +10,6 @@
   "name": "DualLoop",
   "url": "https://dualloop.github.io",
   "repository": "https://github.com/DualLoop/DualLoop.github.io",
-  "title": "DualLoop: Visual Question Generation through Forward–Inverse Agreement",
+  "title": "DualLoop: Visual Question Generation through Forward\u2013Inverse Agreement",
   "googleAnalyticsId": "G-8KT0DEBR8Z"
 }

@@ -143,3 +143,11 @@ body.inverse-page{background:var(--reading-paper)}
   .quiz-toolbar>span{font-size:12px}
   .quiz-navigation{margin-left:auto}
 }
+
+/* Five resource actions: one desktop row, a balanced phone grid. */
+@media(min-width:801px){.question-first-hero .hero-copy{width:min(780px,calc(100vw - 48px))}}
+@media(max-width:800px){
+  .question-first-hero .publication-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:370px;margin:20px auto 0;gap:8px}
+  .question-first-hero .publication-links .button{width:100%;padding:0 8px;font-size:12px;gap:6px}
+  .question-first-hero .publication-links .hero-primary{grid-column:1 / -1}
+}
