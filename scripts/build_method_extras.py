@@ -4,9 +4,20 @@ from build_inverse_measurements import build_measurements
 
 def abstract_content(source):
     text=re.search(r'\\begin\{abstract\}(.*?)\\end\{abstract\}',source,re.S).group(1)
-    # Omit only the paper's self-referential project-page sentence on the website.
+    # Editorial TODO claims are not published; review wrappers preserve their text.
+    for command,keep in [('todo',False),('review',True)]:
+        needle='\\'+command+'{'
+        while needle in text:
+            start=text.index(needle); body=start+len(needle); end=body; depth=1
+            while depth:
+                if text[end]=='{': depth+=1
+                elif text[end]=='}': depth-=1
+                end+=1
+            text=text[:start]+(text[body:end-1] if keep else '')+text[end:]
     text=re.sub(r'Project page:\s*\\url\{https://(?:theblindloop|dualloop)\.github\.io/\}\s*$', '', text)
     text=text.replace(r'\method{}','DualLoop').replace('--','–')
+    text=re.sub(r'\\increase\{([^}]+)\}',r'+\1',text)
+    text=re.sub(r'\\decrease\{([^}]+)\}',r'−\1',text)
     text=re.sub(r'\\url\{([^}]+)\}',r'\1',text)
     assert '\\' not in text, 'New abstract TeX needs explicit rendering'
     return re.sub(r'\s+',' ',text).strip()

@@ -2,7 +2,7 @@
   <div class="container site-width">
     <header class="section-intro">
       <p class="eyebrow">Inside a generated world</p>
-      <h2>Forward and Inverse Programs</h2>
+      <h2>Forward and inverse programs</h2>
       <p>
         Three selected examples illustrate counting, connectivity, and reasoning about a change to a scene. Switch examples to compare the two
         programs.
@@ -55,7 +55,7 @@
   <div class="container site-width">
     <header class="section-intro">
       <p class="eyebrow">Image-replacement test</p>
-      <h2>Image-Replacement Test</h2>
+      <h2>Image-replacement test</h2>
       <p>
         In this test, we keep the scene specification and forward answer fixed, then replace the rendered image. When the replacement supports a different answer, the forward and inverse answers should disagree.
       </p>
@@ -118,7 +118,7 @@
   <div class="container site-width">
     <header class="section-intro">
       <p class="eyebrow">Understanding the inverse programs</p>
-      <h2>Analysis of Inverse Programs</h2>
+      <h2>Analysis of inverse programs</h2>
       <p>
         The paper studies 225 generated worlds, with five worlds from each
         coding-agent–profile pairing. A fresh analysis-agent session inspected
@@ -210,10 +210,10 @@
       </p>
     </header>
     <nav class="results-nav" aria-label="Results sections">
-      <a href="#generation">Generation</a><a href="#steering">Image regions</a
-      ><a href="#evaluation">Model accuracy</a
+      <a href="#generation">Collection growth</a><a href="#steering">Image regions</a
+      ><a href="#evaluation">Model difficulty</a
       ><a href="#feedback">Model feedback</a
-      ><a href="#human-review">Human review</a><a href="#training">Training</a
+      ><a href="#human-review">Human review</a><a href="#training">Training and transfer</a
       ><a href="#external">External benchmarks</a>
     </nav>
     <article class="result-study" id="generation">
@@ -227,7 +227,7 @@
       </p>
       <p>
         Five coding-agent configurations were run on all nine profiles: 45
-        campaigns, each with a six-hour budget and a 20-minute session cap. An
+        campaigns, each with six hours of cumulative agent-session time and a 20-minute session cap. An
         <strong>episode-hour</strong> counts agent-session time, including
         provider waiting, but excludes later verification and analysis. A
         <strong>200-scene replay</strong> is a later agreement check on fresh
@@ -360,7 +360,7 @@
       <p>
         Two disjoint sets of ten such worlds supplied example implementations
         and evaluator feedback. Each coding-agent configuration ran on both sets
-        for six hours per campaign. Later episodes received errors on new
+        for six hours of cumulative agent-session time per campaign. Later episodes received errors on new
         verified worlds. Verification stayed independent of model predictions.
         Open-weight models provided no feedback.
       </p>
@@ -417,24 +417,14 @@
       reviewer flagged 733 instances, one flagged 54, and both flagged 13. These
       are classified review outcomes, not final judgments of which instances are valid.
     </p>
-    <details class="paper-details">
-      <summary>Classification and disagreement</summary>
-      <p>
-        The classification excludes 19 labels consisting of “confusing” from one
-        reviewer’s profile-conditioned assessments. Restoring those labels gives
-        715 instances flagged by neither reviewer, 71 by one, and 14 by both.
-        The final exclusion policy and disputed cases remain under review. The
-        95% complementary judgment proportion in the paper must not be read as a
-        percentage of distinct items confirmed valid.
-      </p>
-    </details>
+    <details class="paper-details"><summary>Review agreement</summary><p>The reviewers’ validity classifications agree on 746 of 800 instances (93.25%). At least one reviewer flagged 67 instances: 13 by both reviewers and 54 by only one. Agreement about validity is distinct from agreement on the question’s answer.</p></details>
   </div>
 </section>
 <section class="section paper-section tinted" id="training">
   <div class="container site-width">
     <header class="section-intro">
       <p class="eyebrow">Training on generated questions</p>
-      <h2>Training on generated questions improves performance on held-out questions and several external benchmarks</h2>
+      <h2>Training on generated questions improves performance beyond the training set</h2>
       <p>
         <strong>Supervised fine-tuning (SFT)</strong> trains a model on
         image–question pairs and their short answer labels.
@@ -468,7 +458,8 @@
     </p>
     <p>
       A percentage point (pp) is an absolute difference between percentages. The
-      table compares unchanged base checkpoints with their SFT counterparts.
+      table compares each unchanged base checkpoint with the mean and standard deviation
+      across four independently fine-tuned checkpoints.
     </p>
     <div class="delta-legend">
       <span class="up">+ Increase in accuracy</span
@@ -480,7 +471,7 @@
         >All three models improve on the separate model-feedback
         collection.</strong
       >
-      The mean change is +5.2 percentage points. Reported changes use unrounded
+      The mean change is +5.3 percentage points. Reported changes use unrounded
       scores, so subtracting displayed rounded accuracies can differ by 0.1
       point.
     </p>
@@ -500,9 +491,9 @@
       <summary>Held-out worlds from profile-conditioned discovery</summary>
       {{heldout}}
       <p>
-        These 45 worlds are held out from the same discovery experiment used for
-        training. This is a different test from transfer to model-feedback
-        worlds. Balancing correct-answer positions changes SFT accuracy from
+        Each of four splits holds out 45 worlds (1,691 instances) from the same
+        discovery experiment used for training. The mean improvement is 10.7 percentage points. This is a different test from transfer to model-feedback
+        worlds. In a separate answer-position check, balancing correct-answer positions changes SFT accuracy from
         71.0% to 71.5%, 74.4% to 75.7%, and 71.8% to 72.5%, respectively.
       </p>
     </details>
@@ -524,8 +515,7 @@
         evaluated profile. Eight of nine profiles improve, with a mean change of
         +6.8 points. Measurement declines by 1.5 points. These runs use sixteen
         accumulation steps and cover one model with one run per excluded
-        profile. Evaluation membership and world-level exclusions remain to be
-        reconciled with archived split records.
+        profile.
       </p>
     </details>
   </div>
@@ -534,12 +524,12 @@
   <div class="container site-width">
     <header class="section-intro">
       <p class="eyebrow">External benchmark transfer</p>
-      <h2>External Benchmark Evaluation</h2>
+      <h2>Transfer to external benchmarks</h2>
       <p>
         Three base models were each fine-tuned on four training splits. The
         table reports each model’s mean change and standard deviation across
         those four splits. The average across models and benchmarks is +2.2
-        points in the supplied summary.
+        points in the paper.
       </p>
     </header>
     <div class="delta-legend">
@@ -551,8 +541,7 @@
     <p class="small-note">
       Entries are mean change ± standard deviation in percentage points, as
       reported in the paper. BLINK covers IQ_Test; RAVEN covers center_single.
-      V* uses only examples where both base and SFT responses are parseable, so
-      its change is conditional on that subset. The aggregate is the paper’s
+      The aggregate is the paper’s
       reported summary across different evaluations, not a pooled example-level
       accuracy.
     </p>
@@ -563,23 +552,15 @@
       standard deviations are larger than the mean declines.
     </p>
     <details class="paper-details">
-      <summary>All single-checkpoint base and SFT scores</summary>
+      <summary>Base and fine-tuned scores across four splits</summary>
       <p>
-        These paired scores are a separate evidence set from the four-split
-        averages. Each pair uses matching examples and retains unparseable
-        responses in the denominator. Accuracy rows use percent and
-        percentage-point changes. DocVQA instead uses
+        These are the base scores and four-checkpoint SFT means underlying the changes above. SFT entries show mean ± standard deviation; changes are in percentage points. DocVQA instead uses
         <strong>Average Normalized Levenshtein Similarity (ANLS)</strong>, a
         text-similarity score, multiplied by 100.
       </p>
       {{external-full-0}}{{external-full-1}}{{external-full-2}}
       <p>
-        PGM and RAVEN present all eight choices. V* here uses the full
-        191-example denominator, unlike the conditional four-split summary.
-        VLMsAreBlind’s 8,016-example external set is separate from the
-        1,691-instance generated-world test set. MathVista declines for both
-        Gemma models in these checkpoint comparisons; Gemma 4 12B also declines
-        on CLEVR.
+        BLINK covers the IQ_Test subset and RAVEN covers center_single. Changes are computed from unrounded scores, so displayed values can differ by 0.1 point when subtracted.
       </p>
     </details>
   </div>

@@ -31,7 +31,10 @@ def main(base):
         page.goto(base+'/results.html',wait_until='networkidle')
         for key in ['transfer','heldout','direct','external','excluded','coverage']:
             actual=page.locator('#table-'+key+' tbody tr').evaluate_all('(rows)=>rows.map(r=>[...r.children].map(c=>c.textContent))')
-            assert actual==tables[key]['rows'],key
+            expected=tables[key]['rows']
+            if key=='external':
+                expected=[[r[0]]+[r[j]+(' ± '+r[j-1].split('±')[1] if '±' in r[j-1] else '') for j in [3,6,9]]+[r[10]] for r in expected]
+            assert actual==expected,key
         assert page.locator('#table-external tbody tr').count()==17
         page.goto(base+'/programs.html',wait_until='networkidle')
         for i in range(3):

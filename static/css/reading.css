@@ -69,3 +69,40 @@ body .site-nav .nav-links a[aria-current=page]{border-color:#385e82}
  .inverse-taxonomy{display:block;overflow-x:auto;max-width:100%}
  .inverse-taxonomy :is(td,th){min-width:100px}
 }
+
+/* Consistent section hierarchy across the overview and reading pages. */
+.homepage #abstract .title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(36px, 4.2vw, 54px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -.035em;
+  text-transform: none;
+  margin-bottom: 26px;
+}
+.gallery-page #questions-heading {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(32px, 4vw, 46px);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -.025em;
+}
+.reading-page .result-study > h2 {
+  font-size: 32px;
+  line-height: 1.3;
+  margin: 10px 0 22px;
+}
+.page-contents { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 24px; }
+.page-contents a { font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
+.inverse-example > header h3 { font: 400 28px/1.25 Georgia, serif; letter-spacing: -.02em; }
+.steering-page .category-panel h3 { font: 400 28px/1.25 Georgia, serif; margin-bottom: 18px; }
+@media (max-width: 760px) {
+  .reading-page .result-study > h2 { font-size: 27px; }
+  .inverse-example > header h3 { font-size: 25px; }
+}
+
+/* Shared accessibility and reading-page treatment. */
+.skip-link{position:absolute;left:16px;top:-100px;z-index:1000;padding:10px 16px;background:white;color:var(--reading-ink)}
+.skip-link:focus{top:12px}
+body.inverse-page{background:var(--reading-paper)}
+.inverse-page .inverse-wrap h2{font-weight:400;margin-top:36px;margin-bottom:18px}

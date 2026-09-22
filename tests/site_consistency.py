@@ -18,7 +18,7 @@ with sync_playwright() as p:
         assert links==navigation,route
         assert page.locator('.site-nav [aria-current="page"]').count()==1,route
         assert page.locator('h1').count()==1,route
-        assert page.locator('link[href="static/css/reading.css"]').count()==1,route
+        assert page.locator('link[href^="static/css/reading.css"]').count()==1,route
         for width in [320,390,768,1440]:
             page.set_viewport_size({'width':width,'height':900})
             assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),(route,width)
