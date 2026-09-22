@@ -2,8 +2,9 @@
   "links": {
     "paper": "",
     "code": "",
-    "data": "",
-    "arxiv": ""
+    "data": "https://huggingface.co/datasets/DualLoop/DualLoop-Evaluation",
+    "arxiv": "",
+    "feedbackData": "https://huggingface.co/datasets/DualLoop/DualLoop-Difficulty-Feedback"
   },
   "bibtex": "",
   "name": "DualLoop",

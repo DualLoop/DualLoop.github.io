@@ -36,7 +36,8 @@
       const labels = {
         paper: "Paper",
         code: "Code",
-        data: "Dataset",
+        data: "Evaluation dataset",
+        feedbackData: "Feedback dataset",
         arxiv: "arXiv",
       };
       let configured = 0;
