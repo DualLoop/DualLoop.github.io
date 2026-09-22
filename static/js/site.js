@@ -50,8 +50,7 @@
       const labels = {
         paper: "Paper",
         code: "GitHub",
-        data: "Evaluation data",
-        feedbackData: "Feedback data",
+        data: "Datasets",
         arxiv: "arXiv",
       };
       let configured = 0;
