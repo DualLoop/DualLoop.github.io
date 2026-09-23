@@ -6,9 +6,6 @@ LINKS=[('index.html','Overview'),('questions.html','Questions'),('programs.html'
 def sync(root=ROOT):
     config=json.loads((root/'data/site.json').read_text())
     site_url=config.get('url','').rstrip('/')
-    analytics_id=config.get('googleAnalyticsId','')
-    if analytics_id and not re.fullmatch(r'G-[A-Z0-9]+',analytics_id):
-        raise ValueError('Invalid Google Analytics measurement ID')
     for page in root.glob('*.html'):
         text=page.read_text()
         if not re.search(r'<nav\b[^>]*class="(?:site-nav|inverse-nav)"',text):
@@ -30,21 +27,8 @@ def sync(root=ROOT):
             text=re.sub(r'<meta[^>]*property="og:url"[^>]*>\s*', '', text)
             text=re.sub(r'<link[^>]*rel="canonical"[^>]*>\s*', '', text)
             text=text.replace('</head>',f'<meta property="og:url" content="{url}" />\n<link rel="canonical" href="{url}" />\n</head>')
-        # Builders may copy a page head; replace the managed block to avoid duplicates.
+        # Remove legacy analytics blocks, including heads copied by builders.
         text=re.sub(r'<!-- ANALYTICS:START -->.*?<!-- ANALYTICS:END -->\s*', '', text, flags=re.S)
-        if analytics_id:
-            tag=f"""<!-- ANALYTICS:START -->
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id={analytics_id}"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){{dataLayer.push(arguments);}}
-  gtag('js', new Date());
-  gtag('config', '{analytics_id}');
-</script>
-<!-- ANALYTICS:END -->
-"""
-            text=text.replace('</head>',tag+'</head>')
         # New content hashes invalidate cached styles and scripts after deployment.
         def version_asset(match):
             attr,asset=match.group(1),match.group(2)

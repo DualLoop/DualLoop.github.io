@@ -33,7 +33,7 @@ for p in ROOT.glob('*.html'):
     parsed=Page();text=p.read_text();parsed.feed(text);pages[p.name]=parsed
     assert parsed.h1==1,p.name
     assert len(parsed.ids)==len(set(parsed.ids)),p.name
-    assert text.count("gtag('config', 'G-8KT0DEBR8Z')")==1,p.name
+    assert not any(marker in text for marker in ("googletagmanager.com", "google-analytics.com", "gtag(", "G-8KT0DEBR8Z")),p.name
     assert '{{' not in text,p.name
     for asset in parsed.assets:
         u=urlsplit(asset);file=ROOT/u.path
